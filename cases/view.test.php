@@ -41,8 +41,26 @@ class ViewTest extends PHPUnit_Framework_TestCase {
 	public function testViewIsCreatedWithCorrectPath()
 	{
 		$view = new View('home.index');
+		
+		$this->assertEquals(
+			str_replace(DS, '/', path('app')).'views/home/index.php',
+			str_replace(DS, '/', $view->path)
+		);
+	}
 
-		$this->assertEquals(path('app').'views' . DIRECTORY_SEPARATOR . 'home' . DIRECTORY_SEPARATOR . 'index.php', $view->path);
+	/**
+	 * Test the View class constructor for bundles.
+	 *
+	 * @group laravel
+	 */
+	public function testBundleViewIsCreatedWithCorrectPath()
+	{
+		$view = new View('laravel-tests::home.index');
+
+		$this->assertEquals(
+			str_replace(DS, '/', Bundle::path('laravel-tests')).'views/home/index.php',
+			str_replace(DS, '/', $view->path)
+		);
 	}
 
 	/**

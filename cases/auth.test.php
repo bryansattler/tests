@@ -17,7 +17,7 @@ class AuthTest extends PHPUnit_Framework_TestCase {
 		$_SERVER['auth.login.stub'] = null;
 		Cookie::$jar = array();
 		Config::$items = array();
-		Auth::$user = null;
+		Auth::driver()->$user = null;
 		Session::$instance = null;
 		Config::set('database.default', 'sqlite');
 	}
@@ -30,7 +30,7 @@ class AuthTest extends PHPUnit_Framework_TestCase {
 		$_SERVER['auth.login.stub'] = null;
 		Cookie::$jar = array();
 		Config::$items = array();
-		Auth::$user = null;
+		Auth::driver()->$user = null;
 		Session::$instance = null;
 		Config::set('database.default', 'mysql');
 	}

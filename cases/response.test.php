@@ -62,16 +62,6 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test the Response::message method.
-	 *
-	 * @group laravel
-	 */
-	public function testMessageReturnsStatusCodeMessage()
-	{
-		$this->assertEquals('OK', Response::make('')->message());
-	}
-
-	/**
 	 * Test the Response::header method.
 	 *
 	 * @group laravel

@@ -13,7 +13,7 @@ class FluentTest extends PHPUnit_Framework_TestCase {
 	{
 		$array = array('name' => 'Taylor', 'age' => 25);
 
-		$fluent = new FLuent($array);
+		$fluent = new Fluent($array);
 
 		$this->assertEquals($array, $fluent->attributes);
 	}
@@ -35,7 +35,7 @@ class FluentTest extends PHPUnit_Framework_TestCase {
 
 	public function testMagicMethodsCanBeUsedToSetAttributes()
 	{
-		$fluent = new FLuent;
+		$fluent = new Fluent;
 
 		$fluent->name = 'Taylor';
 		$fluent->developer();

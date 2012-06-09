@@ -66,21 +66,9 @@ class IoCTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testControllerMethodRegistersAController()
 	{
-		IoC::controller('ioc.test', function() {});
+		IoC::register('controller: ioc.test', function() {});
 
 		$this->assertTrue(IoC::registered('controller: ioc.test'));
-	}
-
-	/**
-	 * Test the IoC::core method.
-	 *
-	 * @group laravel
-	 */
-	public function testCoreMethodReturnsFromLaravel()
-	{
-		IoC::register('laravel.ioc.test', function() { return 'Taylor'; });
-
-		$this->assertEquals('Taylor', IoC::core('ioc.test'));
 	}
 
 }

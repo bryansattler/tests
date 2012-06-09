@@ -21,7 +21,7 @@ class RedirectTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function tearDown()
 	{
-		Input::$input = array();
+		// @todo clear httpfoundation request data
 		Config::set('session.driver', '');
 		Router::$routes = array();
 		Router::$names = array();
@@ -93,7 +93,8 @@ class RedirectTest extends PHPUnit_Framework_TestCase {
 	{
 		$this->setSession();
 
-		Input::$input = $input = array('name' => 'Taylor', 'age' => 25);
+		$input = array('name' => 'Taylor', 'age' => 25);
+		Request::foundation()->request->add($input);
 
 		$redirect = Redirect::to('')->with_input();
 

@@ -121,12 +121,14 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 	{
 		Session::$instance = new SessionPayloadTokenStub;
 
-		Input::$input = array(Session::csrf_token => 'Foo');
+		$input = array(Session::csrf_token => 'Foo');
+		Request::foundation()->request->add($input);
 
 		$this->assertTrue(Request::forged());
 
-		Input::$input = array(Session::csrf_token => 'Taylor');
-
+		$input = array(Session::csrf_token => 'Taylor');
+		Request::foundation()->request->add($input);
+		
 		$this->assertFalse(Request::forged());
 	}
 

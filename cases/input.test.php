@@ -15,7 +15,7 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function tearDown()
 	{
-		Input::$input = array();
+		// @todo clear httpfoundation request data
 		Config::set('application.key', '');
 		Session::$instance = null;
 	}
@@ -27,8 +27,8 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testAllMethodReturnsInputAndFiles()
 	{
-		Input::$input = array('name' => 'Taylor');
-
+		Request::foundation()->request->add(array('name' => 'Taylor'));
+		
 		$_FILES = array('age' => 25);
 
 		$this->assertEquals(Input::all(), array('name' => 'Taylor', 'age' => 25));
@@ -43,7 +43,7 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	{
 		$this->assertFalse(Input::has('foo'));
 
-		Input::$input = array('name' => 'Taylor');
+		Request::foundation()->request->add(array('name' => 'Taylor'));
 
 		$this->assertTrue(Input::has('name'));
 	}
@@ -55,7 +55,7 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetMethodReturnsInputValue()
 	{
-		Input::$input = array('name' => 'Taylor');
+		Request::foundation()->request->add(array('name' => 'Taylor'));
 
 		$this->assertEquals('Taylor', Input::get('name'));
 		$this->assertEquals('Default', Input::get('foo', 'Default'));
@@ -68,7 +68,7 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testOnlyMethodReturnsSubsetOfInput()
 	{
-		Input::$input = array('name' => 'Taylor', 'age' => 25);
+		Request::foundation()->request->add(array('name' => 'Taylor', 'age' => 25));
 
 		$this->assertEquals(array('name' => 'Taylor'), Input::only(array('name')));
 	}
@@ -80,7 +80,7 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testExceptMethodReturnsSubsetOfInput()
 	{
-		Input::$input = array('name' => 'Taylor', 'age' => 25);
+		Request::foundation()->request->add(array('name' => 'Taylor', 'age' => 25));
 
 		$this->assertEquals(array('age' => 25), Input::except(array('name')));
 	}
@@ -124,7 +124,8 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	{
 		$this->setSession();
 
-		Input::$input = $input = array('name' => 'Taylor', 'age' => 25);
+		$input = array('name' => 'Taylor', 'age' => 25);
+		Request::foundation()->request->add($input);
 
 		Input::flash();
 
@@ -148,7 +149,8 @@ class InputTest extends PHPUnit_Framework_TestCase {
 	{
 		$this->setSession();
 
-		Input::$input = $input = array('name' => 'Taylor');
+		$input = array('name' => 'Taylor');
+		Request::foundation()->request->add($input);
 
 		Input::flash();
 

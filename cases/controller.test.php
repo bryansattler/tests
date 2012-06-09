@@ -245,7 +245,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testResolveMethodChecksTheIoCContainer()
 	{
-		IoC::controller('home', function()
+		IoC::register('controller: home', function()
 		{
 			require_once path('app').'controllers/home.php';
 

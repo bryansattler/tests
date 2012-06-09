@@ -9,6 +9,7 @@ class URLTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function setUp()
 	{
+		URL::$base = null;
 		Router::$routes = array();
 		Router::$names = array();
 		Router::$uses = array();
@@ -80,7 +81,7 @@ class URLTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('http://localhost/image.jpg', URL::to_asset('image.jpg'));
 		$this->assertEquals('https://localhost/image.jpg', URL::to_asset('image.jpg', true));
 
-		$_SERVER['HTTPS'] = 'on';
+		Request::foundation()->server->add(array('HTTPS' => 'on'));
 
 		$this->assertEquals('https://localhost/image.jpg', URL::to_asset('image.jpg'));
 	}
